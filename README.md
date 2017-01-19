@@ -14,9 +14,87 @@ If the two lists are empty,the function returns 0(`if not lst1 and not lst2:`) T
 
 
 
+BINARY SEARCH CLASS
+
+The binary search is used to find an item in an ORDERED list.
+For example, to find a number in the list below:
+`2, 5, 7, 12, 14, 21, 28, 31, 36`
+
+To search for an item, look in the middle of the list and see if the number you want is in the middle, above the middle or below the middle. If it is in the middle, you have found the item. If it is higher than the middle value, then adjust the bottom of the list so that you search in a smaller list starting one above the middle of the list. If the number is lower than the middle value, then adjust the top of the list so that you search in a smaller list which has its highest position one less than the middle position.
+Below is a simple algorithm for a binary saerch 
+```python
+Found <- False
+while not Found and first <= top
+    Midpoint <- (First + Last) DIV 2
+    If List[Midpoint] = ItemSought Then
+        ItemFound <- True
+    Else
+        If First >= Last Then
+            SearchFailed <- True
+        Else
+            If List[Midpoint] > ItemSought Then
+                Last <- Midpoint - 1
+            Else
+                First <- Midpoint + 1
+            EndIf
+        EndIf
+    EndIf
+```
+I HAVE USED THE ABOVE CONCEPT TO DO A BINARY SEARCH OF AN ELEMENT IN A LIST AS BELOW:
 
 
 
+```python
+class BinarySearch(list):
+
+    def __init__(self, length, diff):
+        super(BinarySearch, self).__init__()
+        value = diff
+        for i in range(length):
+            self.append(value)
+            value = value + diff
+        self.length = len(self)
+
+    def search(self, value):
+        first = 0
+        last = len(self) - 1
+        mid = 0
+        found = False
+        count = 0
+
+        if value == self[first]:
+            mid = first
+            found = True
+        elif value == self[last]:
+            mid = last
+            found = True
+
+        if value not in self:
+            found = True
+            mid = -1
+
+        while first <= last and not found:
+            mid = (first + last) // 2
+            if self[mid] == value:
+                found = True
+            else:
+                count += 1
+                if value < self[mid]:
+                    last = mid - 1
+                else:
+                    first = mid + 1
+
+        return {'count': count, 'index': mid}
+
+if __name__ == '__main__':
+    binSearch = BinarySearch(100, 10)
+    print(BinarySearch(20, 2).search(40))
+    print(binSearch.search(30))
+    print(binSearch.search(700))
+    print(binSearch.search(10000))
+    ```
+   
+    
 SIMPLE USER INTERFACE CREATED USING HTML AND CSS
 
 HTML is the standard markup language for creating Web pages.HTML stands for Hyper Text Markup Languag and describes the structure of Web pages using markup language.HTML elements are the building blocks of HTML pages.It's elements are represented by tags.HTML tags label pieces of content such as "heading", "paragraph", "table", and so on.Browsers do not display the HTML tags, but use them to render the content of the page.Cascading Style Sheets (CSS) on the other hand  is a style sheet language used for describing the presentation of a document written in a markup languag e.g color,fonts and spacing.The following link show a simple webpage which incorporates the use of html and css.
